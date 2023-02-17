@@ -2,6 +2,8 @@ import logging
 from datetime import datetime
 import os
 
+#This file is created to log the error
+
 LOG_DIR = 'housing_logs'
 
 CURRENT_TIME_STAMP = f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
