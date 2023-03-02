@@ -3,15 +3,15 @@ from typing import List
 
 #Declaring variables for setup functions
 PROJECT_NAME="housing-predictor"
-VERSION="0.0.1"
-AUTHOR="Shubham Mhaske"
-DESRCIPTION="This is a first FSDS Nov batch Machine Learning Project"
+VERSION="0.0.3"
+AUTHOR="Avnish Yadav"
+DESRCIPTION="This is a first Machine Learning Project"
 
 REQUIREMENT_FILE_NAME="requirements.txt"
 
 HYPHEN_E_DOT = "-e ."
 
-#This functions return list of string
+
 def get_requirements_list() -> List[str]:
     """
     Description: This function is going to return list of requirement
@@ -33,7 +33,6 @@ name=PROJECT_NAME,
 version=VERSION,
 author=AUTHOR,
 description=DESRCIPTION,
-packages=find_packages(), # find_packages return all the folder name wherever __init__ file is available
+packages=find_packages(), 
 install_requires=get_requirements_list()
 )
-

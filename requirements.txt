@@ -7,6 +7,5 @@ PyYAML
 evidently
 dill
 matplotlib
--e .
 datetime
-sys
+-e .
