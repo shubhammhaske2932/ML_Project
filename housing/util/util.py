@@ -2,7 +2,7 @@ import yaml
 from housing.exception import HousingException
 import os,sys
 import numpy as np
-import dill
+# import dill
 import pandas as pd
 from housing.constant import *
 
@@ -62,29 +62,29 @@ def load_numpy_array_data(file_path: str) -> np.array:
         raise HousingException(e, sys) from e
 
 
-def save_object(file_path:str,obj):
-    """
-    file_path: str
-    obj: Any sort of object
-    """
-    try:
-        dir_path = os.path.dirname(file_path)
-        os.makedirs(dir_path, exist_ok=True)
-        with open(file_path, "wb") as file_obj:
-            dill.dump(obj, file_obj)
-    except Exception as e:
-        raise HousingException(e,sys) from e
+# def save_object(file_path:str,obj):
+#     """
+#     file_path: str
+#     obj: Any sort of object
+#     """
+#     try:
+#         dir_path = os.path.dirname(file_path)
+#         os.makedirs(dir_path, exist_ok=True)
+#         with open(file_path, "wb") as file_obj:
+#             dill.dump(obj, file_obj)
+#     except Exception as e:
+#         raise HousingException(e,sys) from e
 
 
-def load_object(file_path:str):
-    """
-    file_path: str
-    """
-    try:
-        with open(file_path, "rb") as file_obj:
-            return dill.load(file_obj)
-    except Exception as e:
-        raise HousingException(e,sys) from e
+# def load_object(file_path:str):
+#     """
+#     file_path: str
+#     """
+#     try:
+#         with open(file_path, "rb") as file_obj:
+#             return dill.load(file_obj)
+#     except Exception as e:
+#         raise HousingException(e,sys) from e
 
 
 def load_data(file_path: str, schema_file_path: str) -> pd.DataFrame:
