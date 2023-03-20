@@ -26,6 +26,10 @@ class ModelEvaluation:
             raise HousingException(e, sys) from e
 
     def get_best_model(self):
+
+        """
+        If in the model_evalutaion.yaml file model is available then this function returns model.pkl file otherwise none
+        """
         try:
             model = None
             model_evaluation_file_path = self.model_evaluation_config.model_evaluation_file_path
@@ -40,7 +44,7 @@ class ModelEvaluation:
 
             if BEST_MODEL_KEY not in model_eval_file_content:
                 return model
-
+                        
             model = load_object(file_path=model_eval_file_content[BEST_MODEL_KEY][MODEL_PATH_KEY])
             return model
         except Exception as e:
@@ -62,12 +66,12 @@ class ModelEvaluation:
                 BEST_MODEL_KEY: {
                     MODEL_PATH_KEY: model_evaluation_artifact.evaluated_model_path,
                 }
-            }
+            }  #Train model file path will save into the eval_result
 
             if previous_best_model is not None:
                 model_history = {self.model_evaluation_config.time_stamp: previous_best_model}
                 if HISTORY_KEY not in model_eval_content:
-                    history = {HISTORY_KEY: model_history}
+                    history = {HISTORY_KEY: model_history}  #Old model path save
                     eval_result.update(history)
                 else:
                     model_eval_content[HISTORY_KEY].update(model_history)
@@ -119,7 +123,15 @@ class ModelEvaluation:
                 self.update_evaluation_report(model_evaluation_artifact)
                 logging.info(f"Model accepted. Model eval artifact {model_evaluation_artifact} created")
                 return model_evaluation_artifact
+            
+            #If model is none then till that this function will be executed and return model_evaluation_artifact
 
+            #****************************************************************************************************#
+
+            #If existing model path/production model path available in the model_evaluation.yaml file then below code will be executed
+
+            #In the model list consist of model = production_model.pkl and trained_model_object = newly_trained_model.pkl
+            
             model_list = [model, trained_model_object]
 
             metric_info_artifact = evaluate_regression_model(model_list=model_list,
